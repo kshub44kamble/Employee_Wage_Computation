@@ -1,5 +1,6 @@
 /**
   *class Employee
+  *refactor code calculating employee Wage.
   *@author: shubhamkamble
 */
 import java.util.Random;
@@ -11,40 +12,69 @@ public class Employee
     public static final int EMP_RATE_PER_HOUR=20;
     public static final int WORKING_DAYS_IN_MONTH=20;
     public static final int MAXIMUM_WORK_HOURS=100;
-    //Calculating monthly wage of employee
-    public static void calculateWage()
+
+    /**
+	   *getting employee working hours.
+	*/
+    public static int getWorkingHours(int empCheck)
     {
-        //variables
+        //Variables
+        int empHours = 0;
+        switch (empCheck)
+        {
+            case IS_EMP_FULL_TIME:
+                empHours = 8;
+                break;
+            case IS_EMP_PART_TIME:
+                empHours = 4;
+                break;
+            default:
+                empHours = 0;
+        }
+        return empHours;
+    }
+
+    /**
+	   *Calculating daily wage of employee.
+	*/
+    public static int calculateDailyWage(int empHours)
+    {
+        int DailyWage=0;
+        DailyWage=empHours*EMP_RATE_PER_HOUR;
+        return DailyWage;
+    }
+
+    /**
+	   *calculating monthly wage of employee.
+	*/
+    public static void calculateMonthlyWage()
+    {
+        //Variables
+        int totalEmpHours = 0;
+        int totalSalary = 0;
+        int totalWorkingDays = 0;
         int empHours=0;
-        int empDailyWage=0;
-        int empMonthlyWage=0;
-        int totalEmpHours=0;
-        int totalSalary=0;
-        int totalWorkingDays=0;
-        while(totalEmpHours<MAXIMUM_WORK_HOURS && totalWorkingDays<WORKING_DAYS_IN_MONTH)
+        int empDailyWage[]=new int[100];
+        while (totalEmpHours < MAXIMUM_WORK_HOURS && totalWorkingDays < WORKING_DAYS_IN_MONTH)
         {
             Random randNo = new Random();
-            int empCheck = randNo.nextInt() % 3;
-            switch (empCheck)
-            {
-                case IS_EMP_FULL_TIME:
-                            empHours = 8;
-                            break;
-                case IS_EMP_PART_TIME:
-                            empHours = 4;
-                            break;
-                default:
-                            empHours = 0;
-            }
-            totalEmpHours=totalEmpHours+empHours;
+            int empCheck = randNo.nextInt()%3;
+            empHours = getWorkingHours(empCheck);
+            totalEmpHours = totalEmpHours + empHours;
             totalWorkingDays++;
+            empDailyWage[totalWorkingDays]=calculateDailyWage(empHours);
+            System.out.println(totalWorkingDays+"="+empDailyWage[totalWorkingDays]);
+            totalSalary=totalSalary+empDailyWage[totalWorkingDays];
         }
-        totalSalary=totalEmpHours*EMP_RATE_PER_HOUR;
-        System.out.println("Total Salary of employee="+totalSalary);
+        System.out.println("Total salary of employee="+totalSalary);
     }
+	/**
+	  *main method. 
+	  *@param args.
+	*/
     public static void main(String[] args)
     {
         System.out.println("Welcome to employee wage computation");
-        calculateWage();
+        calculateMonthlyWage();
     }
 }
