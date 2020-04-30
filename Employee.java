@@ -5,27 +5,26 @@
 import java.util.Random;
 
 public class Employee {
+	//Constant.
+	public static final int IS_EMP_PRESENT = 1;
+	public static final int EMP_RATE_PER_HOUR = 20;
 	/**
-	  *Checking employee is present or absent.
-	  *Method Attendance Checking.
+	  *Class Calculating Daily Wage Of Employee.
 	*/
-	public static void attendanceChecking(int IS_EMP_PRESENT) {
+	public static void calculateDailyWage() {
+		//Variables
+		int empHours = 0;
+		int empDailyWage = 0;
+
 		Random randNo = new Random();
-		int empCheck = randNo.nextInt() % 2;
-		if(empCheck == 1) {
-			System.out.println("Employee is Present");
+		int empCheck = randNo.nextInt()%2;
+		if(empCheck == IS_EMP_PRESENT) {
+			empHours = 8;
 		}
-		else {
-			System.out.println("Employee is Absent");
-		}
+		empDailyWage = empHours * EMP_RATE_PER_HOUR;
+		System.out.println("Employee Daily Wage="+empDailyWage);
 	}
 	public static void main(String[] args) {
-	/**
-	  *printing Welcome message
-	  *Calling attendance Checking
-	*/
-		//Constant
-		int IS_EMP_PRESENT = 1;
-		attendanceChecking(IS_EMP_PRESENT);
+	calculateDailyWage();
 	}
 }
