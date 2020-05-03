@@ -44,8 +44,9 @@ public class EmployeeWage implements Serializable {
 	}
 
    	public static void main(String[] args) {
-		EmployeeWage emp = new EmployeeWage();
-		EmployeeWage emp1 = new EmployeeWage("BridgeLabz",20,2,0);
-		EmployeeWage emp2 = new EmployeeWage("Google",30,3,4);
+		EmployeeWage empWage = new EmployeeWage();
+		empWage.EmployeeWage("DMart", 20, 2, 10);
+		empWage.EmployeeWage("Reliance", 10, 4, 20);
+		System.out.println("Total Wage for DMart company: "+empWage);
 	}
 }
